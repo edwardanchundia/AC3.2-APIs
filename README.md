@@ -1,10 +1,18 @@
 # AC3.2-APIs: Intro
----
 
+---
 ### Readings
 
-1.
-2.
+1. [What is an API? - Mulesoft via Youtube](https://www.youtube.com/watch?v=s7wmiS2mSXY)
+ - This is a very quick and helpful video (must watch)
+2. [REST API Concepts - Webconcepts via Youtube](https://www.youtube.com/watch?v=7YcW25PHnAA)
+ - This is a slightly longer, practical look at REST API's (must watch)
+3. [What is an API in English, Please](https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.jxvvtoarm)
+ - If you understood the two videos above this link, you don't really have to read this article
+
+### Resources:
+1. [Postman](https://www.getpostman.com/) - Free tool to test API requests
+2. [Random User API](https://randomuser.me/) - Simple API useful for simple user creation
 
 ---
 ### Objectives
@@ -160,8 +168,10 @@ Many of the APIs discussed prior require some sort of authentication method, but
 
 > Side note, I found an easter egg in the source code of the site's documentation page and tweeted at the developer with my own take on it 😀 (it was a function named like konamiCode()). Could be a nice little anecdote on the development community culture in general. - Louis
 
+
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">nice easter egg <a href="https://twitter.com/solewolf1993">@solewolf1993</a> .. needs more iddqd though. is it open for api requests? <a href="http://t.co/7djehsLWx4">http://t.co/7djehsLWx4</a></p>&mdash; Louis Tur (@louistur) <a href="https://twitter.com/louistur/status/587827969529348096">April 14, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 ![Tweet Image](http://i.imgur.com/Jeqcrdk.png)
 
 ---
