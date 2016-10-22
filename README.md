@@ -9,6 +9,7 @@
  - This is a slightly longer, practical look at REST API's (must watch)
 3. [What is an API in English, Please](https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.jxvvtoarm)
  - If you understood the two videos above this link, you don't really have to read this article
+4. [Basics of Pull to Refresh - Andrew Bancroft](https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/)
 
 ### Resources:
 1. [Postman](https://www.getpostman.com/) - Free tool to test API requests
