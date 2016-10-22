@@ -180,3 +180,33 @@ Many of the APIs discussed prior require some sort of authentication method, but
       - Thoughts: We could do an entire practice lesson on API usage with this API... making the requests, model, etc.. Doing this before moving onto the more complicated Aeris API may serve to ease the learning curve invovled.
     2. Part of this interaction should include clicking on the RandomUser image URLs to further reinforce the universality of the the URL and the need for the developer to handle not only the "plain text" dictionary portion of the json responses, but also their content can vary considerably and will impact how their app should function.
  
+---
+### iFacesterGram: Concept to Demo
+
+Today is the beginning of the rest of everyone's social media account lives: we're going to start creating a brand new social platform called, iFacesterGram. We've lined up about $250,000 in seed money from an anonymous [angel investor](http://www.investopedia.com/terms/a/angelinvestor.asp) who attended our idea pitch event last week. Now it's time to get our little product off the ground. Our PM team wants us first to showcase what a list of users in the app would look like -- a sort of iFacesterGram "friends list." To complete this first assignment, we're going to need to accomplish a few things:
+
+1. Set up a basic UI to display our list of users
+2. Design a way to perform network calls to an API backend to get user data
+ - We're going to have to use some mock data for now, but we want robust sets of data
+3. Create our `User` model and decide how to parse data
+4. Populate our list of users
+5. Implement a pull-to-refresh feature
+
+#### Design & Engineering
+<details>
+  <summary> Q1: What UI element should we use to display the list of users? </summary>
+  UITableviewController
+  (Possibly) A custom UITableviewCell
+</details>
+<details>
+  <summary> Q2: Based on what we know, what architetural design could we use for a network manager? </summary>
+  Singleton
+</details>
+<details>
+  <summary> Q3: What class in the Swift Library can we use to parse raw data from URLRequests?</summary>
+  JSONSerialization
+</details>
+<details>
+  <summary> Q4: What will we need to do to ensure that our list of users updates as soon as our network request finishes?</summary>
+  Wrapping up UI updating in a DispatchQueue.main.async block
+</details>
