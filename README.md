@@ -204,3 +204,25 @@ Today is the beginning of the rest of everyone's social media account lives: we'
   <summary> Q4: What will we need to do to ensure that our list of users updates as soon as our network request finishes?</summary>
   Wrapping up UI updating in a DispatchQueue.main.async block
 </details>
+
+#### Project Orientation
+
+We begin this project with a few things already set up for us (read through and get familiar with the project):
+
+1. Three files already added:
+ - `User.swift` : `struct` for our model
+ - `UsersTableViewController`: our primary view controller to display `Users`
+ - `APIRequestManager` : our singleton to manage network requests
+2. Storyboard has the following:
+ - An instance of `UsersTableViewController` with an embedded `UINavigationController`, set as the initial view controller
+ - A single prototype `UITableViewCell` with the identifier `UserTableViewCellIdentifier`
+ 
+ 
+<details>
+ <summary> Q1: What does <code>private static let</code> indicate about our <code>UserTableViewCellIdentifier</code>?</summary>
+  <ol>
+   <li>Private indicates that the constant is only available to be used inside of the UsersTableViewController class</li>
+   <li>Static indicates that this constant belongs to the UsersTableViewController class and not any 1 instance</li>
+   <li>let indicates that the value does not change</li>
+  </ol>
+ </details>
