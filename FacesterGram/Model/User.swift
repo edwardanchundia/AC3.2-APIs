@@ -62,8 +62,8 @@ internal struct User {
                 // ** Good place to handle errors gracefully **
                 // ** Options here include making the id optional, or generating a random one, or accepting that this will always return nil
                 guard
-                    let id: [String : String] = userResult["id"] as? [String : String],
-                    let idValue: String = id["value"]
+                    let id: [String : String] = userResult["id"] as? [String : String]//,
+                //let idValue: String = id["value"] ?? "N/A"
                 else { return nil }
                 
                 // 8. parse out image URLs
@@ -81,7 +81,7 @@ internal struct User {
                                            state: state,
                                            username: username,
                                            emailAddress: email,
-                                           id: idValue,
+                                           id: id["value"] ?? "N/A",
                                            thumbnailURL: thumbnail)
                 
                 usersToReturn?.append(validUser)

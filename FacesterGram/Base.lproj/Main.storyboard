@@ -48,15 +48,19 @@
                     <navigationItem key="navigationItem" title="iFacesterGram" id="xya-Kx-lvw">
                         <barButtonItem key="backBarButtonItem" title="Back" id="vEA-Ss-a5I"/>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="yul-7S-ycS">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQc-pJ-Ktb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="604" y="28"/>
         </scene>
-        <!--iFacesterGram-->
+        <!--Navigation Controller-->
         <scene sceneID="aOb-fg-UMZ">
             <objects>
-                <navigationController title="iFacesterGram" automaticallyAdjustsScrollViewInsets="NO" id="Svh-o0-7bz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Svh-o0-7bz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6tz-nd-JLz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
