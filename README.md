@@ -175,12 +175,6 @@ Many of the APIs discussed prior require some sort of authentication method, but
 ![Tweet Image](http://i.imgur.com/Jeqcrdk.png)
 
 ---
-# To Do: Exercises
-1. I think this would be a good API for the students to test out requests and parameters due to the single endpoint, limited parameters, and easy to understand/straightforward documentation.
-      - Thoughts: We could do an entire practice lesson on API usage with this API... making the requests, model, etc.. Doing this before moving onto the more complicated Aeris API may serve to ease the learning curve invovled.
-    2. Part of this interaction should include clicking on the RandomUser image URLs to further reinforce the universality of the the URL and the need for the developer to handle not only the "plain text" dictionary portion of the json responses, but also their content can vary considerably and will impact how their app should function.
- 
----
 ### iFacesterGram: Concept to Demo
 
 Today is the beginning of the rest of everyone's social media account lives: we're going to start creating a brand new social platform called, iFacesterGram. We've lined up about $250,000 in seed money from an anonymous [angel investor](http://www.investopedia.com/terms/a/angelinvestor.asp) who attended our idea pitch event last week. Now it's time to get our little product off the ground. Our PM team wants us first to showcase what a list of users in the app would look like -- a sort of iFacesterGram "friends list." To complete this first assignment, we're going to need to accomplish a few things:
