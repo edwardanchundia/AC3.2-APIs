@@ -114,7 +114,7 @@ So looking at our previous request:
 Plugging away in a webbrowser is a lightweight way to test out an API, but we can get some real power by using some utilities specifically meant for making API requests.
  
  -----
- ### [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+### [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
 Try this out: 
 
@@ -154,7 +154,7 @@ Try this out:
 
 
 ---
-# Testing API Requests and [myJson](http://myjson.com/)
+### Testing API Requests and [myJson](http://myjson.com/)
 
 Think back to the `URLSession` demo: I was calling our hosted `json` an "API endpoint". And in some ways it does meet the requirement: we could send a request to the `URL` and we would receive a formatted `json` response. And at its core, an API is just a way to request and receive  info based on a set of parameters. Though, in practice API's are a bit more detailed than simply plugging in a `URL` endpoint and parsing out any data that gets returned. And it's likely that you'll be working with API's with incredible frequency in your development careers. 
 
@@ -163,7 +163,7 @@ Making test requests is a big part of software, and iOS, development. So much so
 Fortunately, since working with API's is such a ubiquoitous thing for all developers (especially ios, android and web) there are quite a few resources and tools available to make development as smooth as possible. Some of the most important tools are those that let us test out API requests to verify that our inputs and outputs are correct and what we expect. 
 
 ---
-# The [Random User API](https://randomuser.me/)
+### The [Random User API](https://randomuser.me/)
 One of my favorite APIs to use for quick testing of creating user accounts is the [Random User API](https://randomuser.me/). 
 Many of the APIs discussed prior require some sort of authentication method, but fortunately the Random User API doesn't require it making it quite easy to hit the ground rounning with testing with it. 
 
@@ -229,7 +229,7 @@ We begin this project with a few things already set up for us (read through and 
  </details>
  
 ---
-# Designing the `User` model
+### Designing the `User` model
 
 Let's take a look at the data that would could potentially be working with. In Postman, set your URL to the random user API endpoint (`https://randomuser.me/api/`) and hit "send" to make a request. Look at the `json` that is returned.. what should we use to populate our user data? 
 
@@ -254,7 +254,7 @@ internal struct User {
 ```
 
 ---
-# Coding the `APIRequest Manager`
+### Coding the `APIRequest Manager`
 
 For right now, our request manager just needs to be able to do a few things: 
 
@@ -272,22 +272,22 @@ Using what you know, and the previous lessons, design a singleton-based manager 
    }
 ```
 
-<detail>
+<details>
 <summary> Q1: Our function definition is missing one thing, what is it? </summary>
 It needs the <code>@escaping</code> key word for the callback closure
-<detail>
+</details>
 
-<detail>
+<details>
 <summary> Design Hints </summary>
 A singleton needs two things: a class-level unchanging constant <code>manager</code>, and a hidden default initializer
 Its quite helpful to define unchanging properties (such as the URL for the api) as a <code>static let</code>
-<detail>
+</details>
 
-> The more you know! 
+> _The more you know!_
 Notice how there is a _ton_ of useless messages being printed to your console? That's an annoying new addition to the latest version of Xcode. To silence this noise, hold down <keyboard>Option</keyboard> while clicking on the Run button (with the play button icon) in Xcode to bring up the `Scheme Manager`. Under "Environment Variables", add a new entry with the name `OS_ACTIVITY_MODE` with a value of `disable`. Now click "Run" and see a much cleaner console output! 
 
 ---
-# Parsing `Data` in our model
+### Parsing `Data` in our model
 
 Structs are nice in Swift because they give you a "free" initializer based on its properties (as long as you don't write your own). In this instance, we're going to use our free initializer, but we're going to be a bit more architecture-focused in how we do it. We're going to use a `static func` on `User` that takes in `Data` and returns `[User]?`. This `static func` is essentially going to be like our `InstaCatFactory`.
 
@@ -317,18 +317,17 @@ As you parse out the `Any` object into arrays and dictionaries, I would recommen
 #### Populating the cells simply
 Set the cell's `textLabel` to display a user's first and last name, and the `detailLabel` to display their username
 
-<detail>
-<summary> Implementation Hints </summary>
-
+<details>
+<summary>Implementation Hints</summary>
 You'll have to update <code>numberOfRows, numberOfSections, and cellForRow</code>
 
 You may want to add a variable to the tableview controller <code>internal var users: [User] = []</code>
 
 Don't forget to update your UI properly! There's a special closure to bring stuff over from the "other" road into the "main" road
-</detail>
+</details>
 
 ---
-# Pull to Refresh
+### Pull to Refresh
 
 Re-running the project to get different data sets is kind of time consuming. It would be much better if we could just do the standard pull-to-refresh action wouldn't it? Heck yea. 
 
