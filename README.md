@@ -9,6 +9,7 @@
  - This is a slightly longer, practical look at REST API's (must watch)
 3. [What is an API in English, Please](https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.jxvvtoarm)
  - If you understood the two videos above this link, you don't really have to read this article
+4. [Basics of Pull to Refresh - Andrew Bancroft](https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/)
 
 ### Resources:
 1. [Postman](https://www.getpostman.com/) - Free tool to test API requests
@@ -226,3 +227,117 @@ We begin this project with a few things already set up for us (read through and 
    <li>let indicates that the value does not change</li>
   </ol>
  </details>
+ 
+---
+# Designing the `User` model
+
+Let's take a look at the data that would could potentially be working with. In Postman, set your URL to the random user API endpoint (`https://randomuser.me/api/`) and hit "send" to make a request. Look at the `json` that is returned.. what should we use to populate our user data? 
+
+<details>
+<summary> What data should our social media app keep on a user for display?</summary>
+ There really is no wrong answer to thing, and it all depends on the design we'd like for our app. We're going to start off using first, last, city, state, username, email, id, and thumbnail 
+</details>
+
+Now, let's fill out the `User` model using these properties
+
+```swift 
+internal struct User {
+    internal let firstName: String
+    internal let lastName: String
+    internal let city: String
+    internal let state: String
+    internal let username: String
+    internal let emailAddress: String
+    internal let id: String
+    internal let thumbnailURL: String
+}
+```
+
+---
+# Coding the `APIRequest Manager`
+
+For right now, our request manager just needs to be able to do a few things: 
+
+1. Send a request to the random user API endpoint
+2. Do some basic error checking
+3. Use a callback closure to handle the returned `Data`
+
+Using what you know, and the previous lessons, design a singleton-based manager class with the function `func getRandomUserData(completion: ((Data?)->Void))`. One you have it set up, call the function inside of the `viewDidLoad` of `UsersTableViewController` and make sure you're getting data and/or handling an error by printing its details out to console.
+
+```swift
+   APIRequestManager.manager.getRandomUserData { (data) in
+       if data != nil {
+          print("Data returned!")
+       }
+   }
+```
+
+<detail>
+<summary> Q1: Our function definition is missing one thing, what is it? </summary>
+It needs the <code>@escaping</code> key word for the callback closure
+<detail>
+
+<detail>
+<summary> Design Hints </summary>
+A singleton needs two things: a class-level unchanging constant <code>manager</code>, and a hidden default initializer
+Its quite helpful to define unchanging properties (such as the URL for the api) as a <code>static let</code>
+<detail>
+
+> The more you know! 
+Notice how there is a _ton_ of useless messages being printed to your console? That's an annoying new addition to the latest version of Xcode. To silence this noise, hold down <keyboard>Option</keyboard> while clicking on the Run button (with the play button icon) in Xcode to bring up the `Scheme Manager`. Under "Environment Variables", add a new entry with the name `OS_ACTIVITY_MODE` with a value of `disable`. Now click "Run" and see a much cleaner console output! 
+
+---
+# Parsing `Data` in our model
+
+Structs are nice in Swift because they give you a "free" initializer based on its properties (as long as you don't write your own). In this instance, we're going to use our free initializer, but we're going to be a bit more architecture-focused in how we do it. We're going to use a `static func` on `User` that takes in `Data` and returns `[User]?`. This `static func` is essentially going to be like our `InstaCatFactory`.
+
+Guidelines:
+
+1. The function signature looks like `static func users(from data: Data) -> [User]?`
+2. Make as many smaller functions as you'd like in order to convert from `Data` into `[User]` (you can also use none, if you'd like, and just put all of the code inside of `users(from:)`)
+3. Test this thoroughly by running the app multiple times
+
+In `viewDidLoad` update the call to be:
+
+```swift 
+  APIRequestManager.manager.getRandomUserData { (data) in
+    if data != nil {
+                
+      if let users = User.users(from: data!) {
+         print("We've got users! \(users)")
+      }
+    }
+  }
+```
+
+#### Handling Errors
+As you parse out the `Any` object into arrays and dictionaries, I would recommend adding `print` statements along the way to see where something is working or failing
+
+
+#### Populating the cells simply
+Set the cell's `textLabel` to display a user's first and last name, and the `detailLabel` to display their username
+
+<detail>
+<summary> Implementation Hints </summary>
+
+You'll have to update <code>numberOfRows, numberOfSections, and cellForRow</code>
+
+You may want to add a variable to the tableview controller <code>internal var users: [User] = []</code>
+
+Don't forget to update your UI properly! There's a special closure to bring stuff over from the "other" road into the "main" road
+</detail>
+
+---
+# Pull to Refresh
+
+Re-running the project to get different data sets is kind of time consuming. It would be much better if we could just do the standard pull-to-refresh action wouldn't it? Heck yea. 
+
+Select the `UserTableViewController` in storyboard and open it's `Attribute Inspector`. Change the `Refreshing` value from `Disabled` to `Enabled`
+
+In `UserTableViewController` create a new function called `func loadUsers()` and add in all of our `APIRequestManager` code to it. Then in `viewDidLoad` add `self.loadUsers()`
+
+Create a new function called `func refreshRequested(_ sender: UIRefreshControl)` and have it call our `loadUsers()` function
+
+Back in `viewDidLoad`, add `self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)`
+
+Now run the project and try it out. Not perfect, but one step closer. 
