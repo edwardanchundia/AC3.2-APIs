@@ -18,9 +18,14 @@ class UsersTableViewController: UITableViewController {
         super.viewDidLoad()
         
 //        self.loadUsers()
+        
+        // exercises
 //        self.loadFiveUsers()
 //        self.loadFiveFemales()
-        self.loadFiveSpaniards()
+//        self.loadFiveSpaniards()
+        
+        // advanced
+        self.loadAdvancedUsers()
         
         self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)
     }
@@ -105,6 +110,24 @@ class UsersTableViewController: UITableViewController {
         }
     }
     
+    internal func loadAdvancedUsers() {
+        APIRequestManager.manager.getUsers(count: 1, gender: .male, nationality: .GB) { (data: Data?) in
+            if data != nil {
+                
+                if let users = User.users(from: data!) {
+                    self.users = users
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -128,9 +151,14 @@ class UsersTableViewController: UITableViewController {
     // MARK: - Refresh Control
     func refreshRequested(_ sender: UIRefreshControl) {
 //        self.loadUsers()
+        
+        // exercises
 //        self.loadFiveUsers()
 //        self.loadFiveFemales()
-        self.loadFiveSpaniards()
+//        self.loadFiveSpaniards()
+        
+        // advanced
+        self.loadAdvancedUsers()
     }
     
 }
