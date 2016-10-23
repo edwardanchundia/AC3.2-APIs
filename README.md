@@ -344,7 +344,7 @@ Now run the project and try it out. Not perfect, but one step closer.
 ---
 ### Exercises
 
-#### More Requests
+#### 1. More Requests
 Create three more functions for our `APIRequestManager`:
 
 1. `func getRandom(users: Int, completion: ((Data?)->Void) )`
@@ -353,18 +353,30 @@ Create three more functions for our `APIRequestManager`:
 
 For each of these, the `users` parameter will be an `Int` that will change the number of results returned on an API call. `UserGender` and `UserNationality` should be two `enum` that correspond to the possible options as listed in the RandomUserAPI documentation (including a "no-preference" option). 
 
-<details><summary>Implementation Hints</summary>
-
-</details>
-
-__Hard Mode__
+__Advanced__
 Using default parameter values, find a way to condense **all** of the four functions we now have in `APIRequestManager` into just one.
 
-__Nightmare Mode__
-Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. 
+#### Resources for Advanced: 
 
-#### Error Handling Exercise
+1. [Why You should love default parameter values - Natasha the Robot](https://www.natashatherobot.com/swift-default-parameter-values/)
+2. [Parameter Defaults and Optional Function Parameters](https://craiggrummitt.com/2016/06/29/parameter-defaults-and-optional-function-parameters-in-swift-3-0/)
 
-- Make it return an error depending on where the casting fails (needs change to function signature)
-- Hard Mode - update everything to use a typealias
-- Nightmare Mode - instead of errors returned, have your fucntion throw. 
+__Expert__
+Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. Call this factory `RandomUserURLFactory` with a singleton called `manager`. This factory class is intended to be used by the `APIRequestManager`.
+
+#### 2. Error Handling Exercise (To be done after error handling lesson)
+
+Part 1: Returning an error:
+
+Printing out that an error has occurred is helpful and all, but it's not exactly the best way to handle errors. The point of errors is that you can detect them and then deal with them "gracefully". With that in mind, we're going to have our `users(from:)` function potentially return an `Error`. Change the function to `static func users(from data: Data) -> ([User]?, UserError?)` and update the code so that each one of the `guard else` statement returns a different error corresponding to the casting that failed.
+Note: `UserError` will be an enum that conforms to `Error` and has multiple cases for each of the potential errors. 
+
+__Advanced__
+Returning a tuple is fine, but let's instead define a new tuple called `UserParseResults` that is of type `([User]?, UserError?)`
+
+#### Resources for Advanced:
+1. [Swift Typealias to the Rescue](https://medium.com/swift-programming/swift-typealias-to-the-rescue-b1027fc571e3#.mhysgw83q)
+2. [Swift Typealiases - Ash Furrow via Artsy Blog](http://artsy.github.io/blog/2016/06/24/typealias-for-great-good/)
+
+__Expert__
+Instead of errors returned, have your `users(from:)` `throw` a `UserError`. Update your function calls in `viewDidLoad` to account for this change. 
