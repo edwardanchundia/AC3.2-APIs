@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum UserGender {
-    case male, female, noPreference
+enum UserGender: String {
+    case male, female, noPreference = ""
 }
 
 enum UserNationality {

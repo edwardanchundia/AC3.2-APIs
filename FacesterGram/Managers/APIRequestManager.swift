@@ -49,7 +49,20 @@ internal class APIRequestManager {
     }
     
     func getRandom(users: Int, gender: UserGender, completion: @escaping ((Data?)->Void) ) {
+        let countAndGenderEndpoint = URL(string: "https://randomuser.me/api/?results=\(users)&gender=\(gender.rawValue)")!
         
+        let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: countAndGenderEndpoint) { (data: Data?, response: URLResponse?, error: Error?) in
+            if error != nil {
+                print("Error encountered in API request: \(error?.localizedDescription)")
+            }
+            
+            if data != nil {
+                print("Data returned in response")
+                completion(data)
+            }
+            
+            }.resume()
     }
     
     func getRandom(users: Int, nationality: UserNationality, completion: @escaping ((Data?)->Void) ) {
