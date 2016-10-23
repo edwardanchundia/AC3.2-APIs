@@ -1,5 +1,32 @@
 # AC3.2-APIs: Intro
-
+---
+### Contents
+0. Intro
+ 1. [Readings](https://github.com/C4Q/AC3.2-APIs/blob/master/README.md#readings)
+ 2. [Resources](https://github.com/C4Q/AC3.2-APIs#resources)
+ 3. [Objectives](https://github.com/C4Q/AC3.2-APIs/blob/master/README.md#objectives)
+1. APIs in Concept
+ 1. [APIs, What Are They?](https://github.com/C4Q/AC3.2-APIs#apis-what-are-they)
+ 2. [Why Do APIs Matter](https://github.com/C4Q/AC3.2-APIs#why-do-apis-matter)
+ 3. [JSON (a deeper dive)](https://github.com/C4Q/AC3.2-APIs#json-a-deeper-dive)
+ 4. [API Documentation](https://github.com/C4Q/AC3.2-APIs#api-documentation)
+ 5. [Trying out an API](https://github.com/C4Q/AC3.2-APIs#trying-out-an-api)
+2. Working with Requests
+ 1. [Postman](https://github.com/C4Q/AC3.2-APIs#postman)
+ 2. [Testing API Requests and myjson](https://github.com/C4Q/AC3.2-APIs#testing-api-requests-and-myjson)
+ 3. [The RandomUserAPI](https://github.com/C4Q/AC3.2-APIs#the-random-user-api)
+3. iFacesterGram (Project)
+ 1. [iFacesterGram: Concept to Demo](https://github.com/C4Q/AC3.2-APIs#ifacestergram-concept-to-demo)
+   - [Design and Engineering](https://github.com/C4Q/AC3.2-APIs#design--engineering)
+    - [Project Orientation](https://github.com/C4Q/AC3.2-APIs#project-orientation)
+ 2. [Designing the `User` Model](https://github.com/C4Q/AC3.2-APIs#designing-the-user-model)
+ 3. [Coding the `APIRequestManager`](https://github.com/C4Q/AC3.2-APIs#coding-the-apirequest-manager)
+ 4. [Parsing Data in Our Model](https://github.com/C4Q/AC3.2-APIs#parsing-data-in-our-model)
+ 5. [Pull-to-Refresh](https://github.com/C4Q/AC3.2-APIs#pull-to-refresh)
+ 6. [Exercises](https://github.com/C4Q/AC3.2-APIs#exercises)
+   - [1. More Requests](https://github.com/C4Q/AC3.2-APIs#1-more-requests)
+    - [2. Error Handling](https://github.com/C4Q/AC3.2-APIs#2-error-handling-exercise-to-be-done-after-error-handling-lesson)
+ 
 ---
 ### Readings
 
