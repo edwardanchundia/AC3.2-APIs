@@ -17,7 +17,8 @@ class UsersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadUsers()
+//        self.loadUsers()
+        self.loadFiveUsers()
         self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)
     }
     
@@ -33,6 +34,24 @@ class UsersTableViewController: UITableViewController {
                 if let users = User.users(from: data!) {
                     print("We've got users! \(users)")
                     
+                    self.users = users
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    internal func loadFiveUsers() {
+        APIRequestManager.manager.getRandom(users: 5) { (data) in
+            if data != nil {
+                
+                if let users = User.users(from: data!) {
                     self.users = users
                     
                     
@@ -68,7 +87,8 @@ class UsersTableViewController: UITableViewController {
     
     // MARK: - Refresh Control
     func refreshRequested(_ sender: UIRefreshControl) {
-        self.loadUsers()
+//        self.loadUsers()
+        self.loadFiveUsers()
     }
     
 }

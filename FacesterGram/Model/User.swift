@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum UserGender {
+    case male, female, noPreference
+}
+
+enum UserNationality {
+    case AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NL, NZ, TR, US, noPreference
+}
+
 internal struct User {
     internal let firstName: String
     internal let lastName: String
@@ -33,14 +41,16 @@ internal struct User {
             
             // 3. Iterrate over each element
             for userResult in results {
-                print("userResult: \(userResult)")
-                
+
                 // 4. parse out name
                 guard
                     let name: [String : String] = userResult["name"] as? [String : String],
                     let first: String = name["first"],
                     let last: String = name["last"]
-                else { return nil }
+                else {
+                    continue
+//                    return nil
+                }
                 
                 // 5. parse out location
                 // ** There will be some problems here: doing [String : String] will occasionally fail since some of the fields are interpreted as Int
@@ -49,13 +59,20 @@ internal struct User {
                     let location: [String : AnyObject] = userResult["location"] as? [String : AnyObject],
                     let city: String = location["city"] as? String,
                     let state: String = location["state"] as? String
-                else { return nil }
+                else {
+                    continue
+//                    return nil
+                }
+                
                 
                 // 6. parse out user name
                 guard
                     let login: [String : String] = userResult["login"] as? [String : String],
                     let username: String = login["username"]
-                else { return nil }
+                else {
+                    continue
+//                    return nil
+                }
                 
                 // 7. parse out id
                 // ** There will be another problem here: depending on nationality, idValue will be nill **
@@ -64,13 +81,19 @@ internal struct User {
                 guard
                     let id: [String : String] = userResult["id"] as? [String : String]//,
                 //let idValue: String = id["value"] ?? "N/A"
-                else { return nil }
+                else {
+                    continue
+//                    return nil
+                }
                 
                 // 8. parse out image URLs
                 guard
                     let pictures: [String : String] = userResult["picture"] as? [String : String],
                     let thumbnail: String = pictures["thumbnail"]
-                else { return nil }
+                else {
+                    continue
+//                    return nil
+                }
                 
                 // 9. the rest
                 guard let email: String = userResult["email"] as? String else { return nil }
@@ -87,6 +110,7 @@ internal struct User {
                 usersToReturn?.append(validUser)
             }
             
+            print("Returning \(usersToReturn?.count) users")
             return usersToReturn
         }
         catch {
