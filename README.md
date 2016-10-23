@@ -1,5 +1,32 @@
 # AC3.2-APIs: Intro
-
+---
+### Contents
+0. Intro
+ 1. [Readings](https://github.com/C4Q/AC3.2-APIs/blob/master/README.md#readings)
+ 2. [Resources](https://github.com/C4Q/AC3.2-APIs#resources)
+ 3. [Objectives](https://github.com/C4Q/AC3.2-APIs/blob/master/README.md#objectives)
+1. APIs in Concept
+ 1. [APIs, What Are They?](https://github.com/C4Q/AC3.2-APIs#apis-what-are-they)
+ 2. [Why Do APIs Matter](https://github.com/C4Q/AC3.2-APIs#why-do-apis-matter)
+ 3. [JSON (a deeper dive)](https://github.com/C4Q/AC3.2-APIs#json-a-deeper-dive)
+ 4. [API Documentation](https://github.com/C4Q/AC3.2-APIs#api-documentation)
+ 5. [Trying out an API](https://github.com/C4Q/AC3.2-APIs#trying-out-an-api)
+2. Working with Requests
+ 1. [Postman](https://github.com/C4Q/AC3.2-APIs#postman)
+ 2. [Testing API Requests and myjson](https://github.com/C4Q/AC3.2-APIs#testing-api-requests-and-myjson)
+ 3. [The RandomUserAPI](https://github.com/C4Q/AC3.2-APIs#the-random-user-api)
+3. iFacesterGram (Project)
+ 1. [iFacesterGram: Concept to Demo](https://github.com/C4Q/AC3.2-APIs#ifacestergram-concept-to-demo)
+   - [Design and Engineering](https://github.com/C4Q/AC3.2-APIs#design--engineering)
+    - [Project Orientation](https://github.com/C4Q/AC3.2-APIs#project-orientation)
+ 2. [Designing the `User` Model](https://github.com/C4Q/AC3.2-APIs#designing-the-user-model)
+ 3. [Coding the `APIRequestManager`](https://github.com/C4Q/AC3.2-APIs#coding-the-apirequest-manager)
+ 4. [Parsing Data in Our Model](https://github.com/C4Q/AC3.2-APIs#parsing-data-in-our-model)
+ 5. [Pull-to-Refresh](https://github.com/C4Q/AC3.2-APIs#pull-to-refresh)
+ 6. [Exercises](https://github.com/C4Q/AC3.2-APIs#exercises)
+   - [1. More Requests](https://github.com/C4Q/AC3.2-APIs#1-more-requests)
+    - [2. Error Handling](https://github.com/C4Q/AC3.2-APIs#2-error-handling-exercise-to-be-done-after-error-handling-lesson)
+ 
 ---
 ### Readings
 
@@ -114,7 +141,7 @@ So looking at our previous request:
 Plugging away in a webbrowser is a lightweight way to test out an API, but we can get some real power by using some utilities specifically meant for making API requests.
  
  -----
- ### [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+### [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
 
 Try this out: 
 
@@ -154,7 +181,7 @@ Try this out:
 
 
 ---
-# Testing API Requests and [myJson](http://myjson.com/)
+### Testing API Requests and [myJson](http://myjson.com/)
 
 Think back to the `URLSession` demo: I was calling our hosted `json` an "API endpoint". And in some ways it does meet the requirement: we could send a request to the `URL` and we would receive a formatted `json` response. And at its core, an API is just a way to request and receive  info based on a set of parameters. Though, in practice API's are a bit more detailed than simply plugging in a `URL` endpoint and parsing out any data that gets returned. And it's likely that you'll be working with API's with incredible frequency in your development careers. 
 
@@ -163,7 +190,7 @@ Making test requests is a big part of software, and iOS, development. So much so
 Fortunately, since working with API's is such a ubiquoitous thing for all developers (especially ios, android and web) there are quite a few resources and tools available to make development as smooth as possible. Some of the most important tools are those that let us test out API requests to verify that our inputs and outputs are correct and what we expect. 
 
 ---
-# The [Random User API](https://randomuser.me/)
+### The [Random User API](https://randomuser.me/)
 One of my favorite APIs to use for quick testing of creating user accounts is the [Random User API](https://randomuser.me/). 
 Many of the APIs discussed prior require some sort of authentication method, but fortunately the Random User API doesn't require it making it quite easy to hit the ground rounning with testing with it. 
 
@@ -229,7 +256,7 @@ We begin this project with a few things already set up for us (read through and 
  </details>
  
 ---
-# Designing the `User` model
+### Designing the `User` model
 
 Let's take a look at the data that would could potentially be working with. In Postman, set your URL to the random user API endpoint (`https://randomuser.me/api/`) and hit "send" to make a request. Look at the `json` that is returned.. what should we use to populate our user data? 
 
@@ -254,7 +281,7 @@ internal struct User {
 ```
 
 ---
-# Coding the `APIRequest Manager`
+### Coding the `APIRequest Manager`
 
 For right now, our request manager just needs to be able to do a few things: 
 
@@ -272,22 +299,22 @@ Using what you know, and the previous lessons, design a singleton-based manager 
    }
 ```
 
-<detail>
+<details>
 <summary> Q1: Our function definition is missing one thing, what is it? </summary>
 It needs the <code>@escaping</code> key word for the callback closure
-<detail>
+</details>
 
-<detail>
+<details>
 <summary> Design Hints </summary>
 A singleton needs two things: a class-level unchanging constant <code>manager</code>, and a hidden default initializer
 Its quite helpful to define unchanging properties (such as the URL for the api) as a <code>static let</code>
-<detail>
+</details>
 
-> The more you know! 
+> _The more you know!_
 Notice how there is a _ton_ of useless messages being printed to your console? That's an annoying new addition to the latest version of Xcode. To silence this noise, hold down <keyboard>Option</keyboard> while clicking on the Run button (with the play button icon) in Xcode to bring up the `Scheme Manager`. Under "Environment Variables", add a new entry with the name `OS_ACTIVITY_MODE` with a value of `disable`. Now click "Run" and see a much cleaner console output! 
 
 ---
-# Parsing `Data` in our model
+### Parsing `Data` in our model
 
 Structs are nice in Swift because they give you a "free" initializer based on its properties (as long as you don't write your own). In this instance, we're going to use our free initializer, but we're going to be a bit more architecture-focused in how we do it. We're going to use a `static func` on `User` that takes in `Data` and returns `[User]?`. This `static func` is essentially going to be like our `InstaCatFactory`.
 
@@ -317,18 +344,17 @@ As you parse out the `Any` object into arrays and dictionaries, I would recommen
 #### Populating the cells simply
 Set the cell's `textLabel` to display a user's first and last name, and the `detailLabel` to display their username
 
-<detail>
-<summary> Implementation Hints </summary>
-
+<details>
+<summary>Implementation Hints</summary>
 You'll have to update <code>numberOfRows, numberOfSections, and cellForRow</code>
 
 You may want to add a variable to the tableview controller <code>internal var users: [User] = []</code>
 
 Don't forget to update your UI properly! There's a special closure to bring stuff over from the "other" road into the "main" road
-</detail>
+</details>
 
 ---
-# Pull to Refresh
+### Pull to Refresh
 
 Re-running the project to get different data sets is kind of time consuming. It would be much better if we could just do the standard pull-to-refresh action wouldn't it? Heck yea. 
 
@@ -341,3 +367,43 @@ Create a new function called `func refreshRequested(_ sender: UIRefreshControl)`
 Back in `viewDidLoad`, add `self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)`
 
 Now run the project and try it out. Not perfect, but one step closer. 
+
+---
+### Exercises
+
+#### 1. More Requests
+Create three more functions for our `APIRequestManager`:
+
+1. `func getRandom(users: Int, completion: ((Data?)->Void) )`
+2. `func getRandom(users: Int, gender: UserGender, completion: ((Data?)->Void) )`
+3. `func getRandom(users: Int, nationality: UserNationality, completion: ((Data?)->Void) )`
+
+For each of these, the `users` parameter will be an `Int` that will change the number of results returned on an API call. `UserGender` and `UserNationality` should be two `enum` that correspond to the possible options as listed in the RandomUserAPI documentation (including a "no-preference" option). 
+
+__Advanced__
+Using default parameter values, find a way to condense **all** of the four functions we now have in `APIRequestManager` into just one.
+
+#### Resources for Advanced: 
+
+1. [Why You should love default parameter values - Natasha the Robot](https://www.natashatherobot.com/swift-default-parameter-values/)
+2. [Parameter Defaults and Optional Function Parameters](https://craiggrummitt.com/2016/06/29/parameter-defaults-and-optional-function-parameters-in-swift-3-0/)
+
+__Expert__
+Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. Call this factory `RandomUserURLFactory` with a singleton called `manager`. This factory class is intended to be used by the `APIRequestManager`.
+
+#### 2. Error Handling Exercise (To be done after error handling lesson)
+
+Part 1: Returning an error:
+
+Printing out that an error has occurred is helpful and all, but it's not exactly the best way to handle errors. The point of errors is that you can detect them and then deal with them "gracefully". With that in mind, we're going to have our `users(from:)` function potentially return an `Error`. Change the function to `static func users(from data: Data) -> ([User]?, UserError?)` and update the code so that each one of the `guard else` statement returns a different error corresponding to the casting that failed.
+Note: `UserError` will be an enum that conforms to `Error` and has multiple cases for each of the potential errors. 
+
+__Advanced__
+Returning a tuple is fine, but let's instead define a new tuple called `UserParseResults` that is of type `([User]?, UserError?)`
+
+#### Resources for Advanced:
+1. [Swift Typealias to the Rescue](https://medium.com/swift-programming/swift-typealias-to-the-rescue-b1027fc571e3#.mhysgw83q)
+2. [Swift Typealiases - Ash Furrow via Artsy Blog](http://artsy.github.io/blog/2016/06/24/typealias-for-great-good/)
+
+__Expert__
+Instead of errors returned, have your `users(from:)` `throw` a `UserError`. Update your function calls in `viewDidLoad` to account for this change. 
