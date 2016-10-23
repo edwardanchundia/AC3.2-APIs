@@ -340,3 +340,31 @@ Create a new function called `func refreshRequested(_ sender: UIRefreshControl)`
 Back in `viewDidLoad`, add `self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)`
 
 Now run the project and try it out. Not perfect, but one step closer. 
+
+---
+### Exercises
+
+#### More Requests
+Create three more functions for our `APIRequestManager`:
+
+1. `func getRandom(users: Int, completion: ((Data?)->Void) )`
+2. `func getRandom(users: Int, gender: UserGender, completion: ((Data?)->Void) )`
+3. `func getRandom(users: Int, nationality: UserNationality, completion: ((Data?)->Void) )`
+
+For each of these, the `users` parameter will be an `Int` that will change the number of results returned on an API call. `UserGender` and `UserNationality` should be two `enum` that correspond to the possible options as listed in the RandomUserAPI documentation (including a "no-preference" option). 
+
+<details><summary>Implementation Hints</summary>
+
+</details>
+
+__Hard Mode__
+Using default parameter values, find a way to condense **all** of the four functions we now have in `APIRequestManager` into just one.
+
+__Nightmare Mode__
+Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. 
+
+#### Error Handling Exercise
+
+- Make it return an error depending on where the casting fails (needs change to function signature)
+- Hard Mode - update everything to use a typealias
+- Nightmare Mode - instead of errors returned, have your fucntion throw. 
