@@ -12,8 +12,8 @@ enum UserGender: String {
     case male, female, noPreference = ""
 }
 
-enum UserNationality {
-    case AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NL, NZ, TR, US, noPreference
+enum UserNationality: String {
+    case AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NL, NZ, TR, US, noPreference = ""
 }
 
 internal struct User {

@@ -19,7 +19,9 @@ class UsersTableViewController: UITableViewController {
         
 //        self.loadUsers()
 //        self.loadFiveUsers()
-        self.loadFiveFemales()
+//        self.loadFiveFemales()
+        self.loadFiveSpaniards()
+        
         self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)
     }
     
@@ -85,6 +87,24 @@ class UsersTableViewController: UITableViewController {
 
     }
     
+    internal func loadFiveSpaniards() {
+        APIRequestManager.manager.getRandom(users: 5, nationality: .ES) { (data) in
+            if data != nil {
+                
+                if let users = User.users(from: data!) {
+                    self.users = users
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,7 +129,8 @@ class UsersTableViewController: UITableViewController {
     func refreshRequested(_ sender: UIRefreshControl) {
 //        self.loadUsers()
 //        self.loadFiveUsers()
-        self.loadFiveFemales()
+//        self.loadFiveFemales()
+        self.loadFiveSpaniards()
     }
     
 }
