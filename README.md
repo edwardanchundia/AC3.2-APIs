@@ -391,6 +391,21 @@ Using default parameter values, find a way to condense **all** of the four funct
 __Expert__
 Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. Call this factory `RandomUserURLFactory` with a singleton called `manager`. This factory class is intended to be used by the `APIRequestManager`.
 
+`RandomUserURLFactory` will have one function: `func endpoint(users: Int, nationality: [UserNationality], gender: UserGender) -> URL`. From those parameters, build an appropriate URL to make a request. Be sure to use Postman to test URLs and make sure you have an understanding of the format of the parameters.
+
+Examples:
+
+| | |
+|---|---|
+|Input|`RandomUserURLFactory.manager.endpoint(users: 10, nationality: [.GB], gender: .male)`|
+|Output| `https://randomuser.me/api/?results=10&nat=GB&gender=male` |
+
+| | |
+|---|---|
+|Input| `RandomUserURLFactory.manager.endpoint(users: 2, nationality: [.AU,.BR,.GB], gender: .noPreference)` |
+|Output| `https://randomuser.me/api/?results=2&nat=AU,BR,GB&gender=` |
+
+
 #### 2. Error Handling Exercise (To be done after error handling lesson)
 
 Part 1: Returning an error:
