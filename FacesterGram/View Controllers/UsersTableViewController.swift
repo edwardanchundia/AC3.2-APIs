@@ -16,7 +16,6 @@ class UsersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        self.loadUsers()
         
         // exercises
@@ -26,7 +25,7 @@ class UsersTableViewController: UITableViewController {
         
         // advanced
         self.loadAdvancedUsers()
-        
+
         self.refreshControl?.addTarget(self, action: #selector(refreshRequested(_:)), for: .valueChanged)
     }
     
@@ -111,7 +110,7 @@ class UsersTableViewController: UITableViewController {
     }
     
     internal func loadAdvancedUsers() {
-        APIRequestManager.manager.getUsers(count: 1, gender: .male, nationality: .GB) { (data: Data?) in
+        APIRequestManager.manager.getUsers(count: 10, gender: .male, nationality: .GB) { (data: Data?) in
             if data != nil {
                 
                 if let users = User.users(from: data!) {
