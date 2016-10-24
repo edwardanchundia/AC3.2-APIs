@@ -380,7 +380,18 @@ Create three more functions for our `APIRequestManager`:
 
 For each of these, the `users` parameter will be an `Int` that will change the number of results returned on an API call. `UserGender` and `UserNationality` should be two `enum` that correspond to the possible options as listed in the RandomUserAPI documentation (including a "no-preference" option). 
 
+<details><summary>Code Hints</summary>
+
+<ol>
+<li> Your enums will look like this: <code>enum UserGender: String { ... }</code> and <code>enum UserNationality: String { ... }</code>
+<li> Constructing URL's is more easily done by starting off with a <code>String</code> and then later using <code>URL(string:)</code> when the string is ready.
+<li>Pay attention to the documentation on making requests with parameter. 
+</ol>
+
+</details>
+
 __Advanced__
+
 Using default parameter values, find a way to condense **all** of the four functions we now have in `APIRequestManager` into just one.
 
 #### Resources for Advanced: 
@@ -389,9 +400,10 @@ Using default parameter values, find a way to condense **all** of the four funct
 2. [Parameter Defaults and Optional Function Parameters](https://craiggrummitt.com/2016/06/29/parameter-defaults-and-optional-function-parameters-in-swift-3-0/)
 
 __Expert__
+
 Create a separate "factory" class to generate the appropriate `URL` given the different possible parameters of `users`, `nationality` and `gender`. Call this factory `RandomUserURLFactory` with a singleton called `manager`. This factory class is intended to be used by the `APIRequestManager`.
 
-`RandomUserURLFactory` will have one function: `func endpoint(users: Int, nationality: [UserNationality], gender: UserGender) -> URL`. From those parameters, build an appropriate URL to make a request. Be sure to use Postman to test URLs and make sure you have an understanding of the format of the parameters.
+`RandomUserURLFactory` will have one function: `func endpoint(users: Int, nationality: [UserNationality], gender: UserGender) -> URL`. From those parameters, build an appropriate URL to make a request. There are no particular rules on how you should go about doing this, so feel free to explore code. Just be sure to use Postman to test URLs and make sure you have an understanding of the format of the parameters.
 
 Examples:
 
@@ -406,6 +418,7 @@ Examples:
 |Output| `https://randomuser.me/api/?results=2&nat=AU,BR,GB&gender=` |
 
 
+---
 #### 2. Error Handling Exercise (To be done after error handling lesson)
 
 Part 1: Returning an error:
@@ -414,11 +427,14 @@ Printing out that an error has occurred is helpful and all, but it's not exactly
 Note: `UserError` will be an enum that conforms to `Error` and has multiple cases for each of the potential errors. 
 
 __Advanced__
+
 Returning a tuple is fine, but let's instead define a new tuple called `UserParseResults` that is of type `([User]?, UserError?)`
 
 #### Resources for Advanced:
+
 1. [Swift Typealias to the Rescue](https://medium.com/swift-programming/swift-typealias-to-the-rescue-b1027fc571e3#.mhysgw83q)
 2. [Swift Typealiases - Ash Furrow via Artsy Blog](http://artsy.github.io/blog/2016/06/24/typealias-for-great-good/)
 
 __Expert__
+
 Instead of errors returned, have your `users(from:)` `throw` a `UserError`. Update your function calls in `viewDidLoad` to account for this change. 
