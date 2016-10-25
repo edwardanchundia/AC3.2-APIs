@@ -164,9 +164,6 @@
                                                 <constraint firstAttribute="width" constant="49" id="wSz-4I-ol8"/>
                                             </constraints>
                                             <color key="onTintColor" red="0.42745098040000001" green="0.77394291193355702" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="didFlipSwitch:" destination="AkT-L8-O1N" eventType="valueChanged" id="GY8-lq-cRT"/>
-                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>

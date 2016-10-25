@@ -50,7 +50,4 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
 
-    @IBAction func didFlipSwitch(_ sender: UISwitch) {
-        
-    }
 }
