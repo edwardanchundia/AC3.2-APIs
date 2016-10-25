@@ -334,9 +334,14 @@ In `viewDidLoad` update the call to be:
   }
 ```
 
+#### Lecture Notes Update:
+
+1. Ignore the `let id: String` constant in `User` for now (this value is occasionally `nil`)
+ - Alternatively, if you've done the normal casting and it all works, adjust the `id` parameter to be an `Optional`
+2. You'll run into an issue with casting from `"location"` if you attempt to cast it's contents to `[String : String]`. The reason being that the value for the `postalCode` key is an `Integer`. So the cast will fail if you try to set it as a `[String: String]`. There are different approaches to how to handle this, but it might be easiest to get the value of `jsonDict["location"] as? [String : AnyObject]`, followed by getting the value for the `state` and `city` keys as `String`
+
 #### Handling Errors
 As you parse out the `Any` object into arrays and dictionaries, I would recommend adding `print` statements along the way to see where something is working or failing
-
 
 #### Populating the cells simply
 Set the cell's `textLabel` to display a user's first and last name, and the `detailLabel` to display their username
