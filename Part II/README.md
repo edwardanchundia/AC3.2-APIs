@@ -21,6 +21,55 @@
 5. [Rubber Duck Debugging - Wiki](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 
 ---
+### Just a tiny bit of error handling, plzzz
+
+> *(said with exasperation)* "JSON is... JSON" - Louis
+
+Working with json can be tricky with all of the casting you'll need to do to make it work. But there's no escaping it! So what we should be doing as developers is making things slightly less tedious for us; a task that can be accomplished by having good error handling. What's particularly nice about error handling in swift, is that it's incredibly flexible and easy to work into your existing code.
+
+For any function that throws, or in a situation where you'd like to include code inside of a `do/catch`, you can easily define your own `Error` type, by just creating an `enum` that conforms to `Error`! `Error` has no required properties or functions; it really just signals that your data type is meant to be used in situations where an error should occur. 
+
+```swift
+internal enum UserModelParseError: Error {
+    case results, name, location, login, id, picture, email
+}
+```
+
+#### Try this out
+Instead of `return nil` in our `guard else` block, we can instead `throw` a `UserModelParseError`! Go ahead and go through your code and make the adjustments necessary. Now, change the name of an expected `key` for your parsing and observer the error that shows up in the `catch` block. 
+
+#### We can do better
+By giving our `UserModelParseError` cases a parameter, we can pass in values to the error as well. 
+
+```swift
+internal enum UserModelParseError: Error {
+    case results(json: Any)
+    case name(json: AnyObject)
+    case location(json: AnyObject)
+    case login(json: AnyObject)
+    case id(json: AnyObject)
+    case pictures(json: AnyObject)
+    case email(json: AnyObject)
+}
+```
+
+Now when we `throw`, we can make this change: 
+
+```swift
+  throw UserModelParseError.name(json: userResult)
+```
+
+But what good is this unless we can access this parameter later? Catch clauses can make use of variable binding to access the parameters that an `Error` gets passed!! (I'm really excited by this, hence __2__ exclamation points)
+
+```swift 
+  catch let UserModelParseError.name(json: json) {
+    print("An error occured parsing the 'name' key: \(json)")
+  }
+```
+
+Depending on your needs, you can update these `Error` cases to include all sorts of data to later use when figuring out how you should handle a particular error. (For example, say your code was still having issues casting for the "id" field. Inside of the `catch` block for that particular error you might decide you want to return an instance of `User` with empty strings in all fields, instead of returning `nil`... not that that would be very practical, but it shows that you can have some flexibility in fixing mistakes)
+
+---
 ### Parameterization of Requests
 
 We've already taken a look at how to refine the data that gets returned from an API: the RandomUserAPI allows for parameters to be passed in with the URL to determine the information that is sent in a response. For example, we can limit the number of returned results by tacking on the key `results` with an integer as the value. Looking at the RandomUserAPI documentation, we can see there are a number of these parameter keys we can use to craft the response data as we need to:
@@ -38,7 +87,7 @@ By allowing ourselves to modify our request to the RandomUserAPI by use of param
 
 For this particular settings menu, we want to be able to change the following:
 
-1. The number of results per request (from 1 - 5000)
+1. The number of results per request (from 1 - 200)
 2. The gender of the returned Users (Male, Female or Both)
 3. The pool of nationality that the Users can be from (there are many of these)
 
@@ -86,8 +135,6 @@ The above example was, for the most part, straightforward. This one will be a bi
 
 ![Updated Prototype Cells](./Images/updatedFilterCells.png)
 
-__Discuss:__
-
 Q1: What can we say for certain about the changes needed?
 
 Q2: Similarly, what is ambiguous about the changes?
@@ -119,5 +166,41 @@ __Implementation Details (a.k.a "spoilers")__
   - 1 `UILabel` and 1 `UISwitch`
   - Again, both elements are vertically aligned
   - `Option` label is `8pt` to left relative to margins
-  - Switch is `8pt` to the right, relative to margins. Additionally, it is `height`: `31pt`, `width`: `49pt` 
+  - Switch is `8pt` to the right, relative to margins. Additionally, it is `height`: `31pt`, `width`: `49pt`
+  
+#### Code Updates
+1. Create a new `UITableViewCell` subclass called `SliderTableViewCell`
+2. Create outlets for the `slider` and the `numberOfResultsLabel`
+3. Add the function `internal func updateSlider(min: Int, max: Int, current: Int)`
+  - In this function, adjust the `.minimum, .maximum and .value` for the `slider` using the provided parameters
+  - Additionally, update the label text
+4. Add an action outlet for the slider named `didChangeValue`
+5. Run the project at this point to verify that the changes you made worked
+
+<details><summary>Q1: What should we do in the didChangeValue code?</summary>
+Update the text label 
+</details>
+<details><summary>Q2: How should this class interact with our SettingsManager?</summary>
+There can be many discussion points here, but the critical on is that we need to be able to update the locally stored values in our SettingsManager in some manner. 
+</details>
+
+---
+### The `SettingsManager` singleton
+
+Start out simply by setting up your `manager` instance and `private init`
+
+This time around, we're going to utilize the singleton in a much more useful manner by having it manage our settings across the entirety of our app! Add the following `var` to the `SettingsManager` class:
+
+1. `var results: Int`
+2. `var gender: UserGender`
+3. `var nationality: UserNationality`
+4. `var excluded: UserFields`
+
+Additionally, create three `enum` in the `SettingsManager.swift` file, but outside of the {}'s for `SettingsManager`:
+
+1. `enum UserGender: String`
+2. `enum UserNationality: String`
+3. `enum UserFields: String`
+
+
 
