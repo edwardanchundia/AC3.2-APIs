@@ -6,6 +6,10 @@
 1. [HTTP Methods - tutorialspoint](https://www.tutorialspoint.com/http/http_methods.htm)
 2. [What is the difference between POST and GET? - Stackoverflow](http://stackoverflow.com/questions/3477333/what-is-the-difference-between-post-and-get)
 3. [Understanding HTTP Basics - OneMonth](http://learn.onemonth.com/understanding-http-basics)
+4. [The Rubber Duck Story - Youtube](https://www.youtube.com/watch?v=huOPVqztPdc)
+5. [Using Storyboards and Swift to Build Dynamic Tableviews](http://www.techotopia.com/index.php/Using_Storyboards_and_Swift_to_Build_Dynamic_TableViews_with_Prototype_Table_View_Cells)
+6. [NSUserDefaults - Coding Explorer](http://www.codingexplorer.com/nsuserdefaults-a-swift-introduction/)
+  - Note: Read this if you have time, but we may not get to it
 
 #### References
 
@@ -14,6 +18,7 @@
 2. [HTTP Status Codes - REST API Tutorial](http://www.restapitutorial.com/httpstatuscodes.html)
 3. [HTTP Methods for RESTful Services - REST API Tutorial](http://www.restapitutorial.com/lessons/httpmethods.html)
 4. [What is REST? - REST API Tutorial](http://www.restapitutorial.com/lessons/whatisrest.html)
+5. [Rubber Duck Debugging - Wiki](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 
 ---
 ### Parameterization of Requests
