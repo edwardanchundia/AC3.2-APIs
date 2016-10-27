@@ -39,17 +39,13 @@ internal enum UserModelParseError: Error {
 Instead of `return nil` in our `guard else` block, we can instead `throw` a `UserModelParseError`! Go ahead and go through your code and make the adjustments necessary. Now, change the name of an expected `key` for your parsing and observer the error that shows up in the `catch` block. 
 
 #### We can do better
-By giving our `UserModelParseError` cases a parameter, we can pass in values to the error as well. 
+By giving our `UserModelParseError` cases a parameter, we can pass in values to the error as well. Let's just change one of them for now...
 
 ```swift
 internal enum UserModelParseError: Error {
-    case results(json: Any)
+    // .. code ..
     case name(json: AnyObject)
-    case location(json: AnyObject)
-    case login(json: AnyObject)
-    case id(json: AnyObject)
-    case pictures(json: AnyObject)
-    case email(json: AnyObject)
+    // .. other code ..
 }
 ```
 
@@ -69,10 +65,14 @@ But what good is this unless we can access this parameter later? Catch clauses c
 
 Depending on your needs, you can update these `Error` cases to include all sorts of data to later use when figuring out how you should handle a particular error. (For example, say your code was still having issues casting for the "id" field. Inside of the `catch` block for that particular error you might decide you want to return an instance of `User` with empty strings in all fields, instead of returning `nil`... not that that would be very practical, but it shows that you can have some flexibility in fixing mistakes)
 
+#### >>5 Min Challenge
+Replace all of the `enum` cases to accept a parameter of `AnyObject`. Update your `catch` blocks appropriately. 
+__Bonus:__ Can you think of a way to have just a single case that handles every type of parsing error and provides a description of where the error happened?
+
 ---
 ### Parameterization of Requests
 
-We've already taken a look at how to refine the data that gets returned from an API: the RandomUserAPI allows for parameters to be passed in with the URL to determine the information that is sent in a response. For example, we can limit the number of returned results by tacking on the key `results` with an integer as the value. Looking at the RandomUserAPI documentation, we can see there are a number of these parameter keys we can use to craft the response data as we need to:
+We've already taken a look at how to refine the data that gets returned from an API: the RandomUserAPI allows for parameters to be passed in with the `URL` to determine the information that is sent in a response. For example, we can limit the number of returned results by tacking on the key `results` with an integer as the value. Looking at the RandomUserAPI documentation, we can see there are a number of these parameter keys we can use to craft the response data as we need to:
 
 |`Key`|Purpose|Example|
 |---|---|---|
@@ -239,7 +239,7 @@ Lastly, let's update the original method for user requests to use the value from
 
 `private static let randomAPIEndpoint: URL = URL(string: "https://randomuser.me/api/?results=\(SettingsManager.manager.results)")`
 
-<details><summary>Wait... what's going on?</summary>
+<details><summary>Q1: Why wont this work?</summary>
 Well, when the singleton gets made, the SettingsManager value for results is set. So, it's not going to update later on on its own. 
   
 So now, we'll need to build out something to help manage the URLs for the requests that need to be made! 
@@ -249,18 +249,12 @@ So now, we'll need to build out something to help manage the URLs for the reques
 ### Exercises
 
 #### Part I
-Task 1: With one type of settings cell ready, let's move on to the next one: `SegmentedCell`. Make sure that your `UITableViewCell` subclass can communicate with `SettingsManager` to update the value for the parameter.
+Task 1: With one type of settings cell ready, let's move on to the next one: `SegmentedCell`. Make sure that your `UITableViewCell` subclass can communicate with `SettingsManager` to update the value for the parameter. Similarly, work on `SwitchCell`
 
-Task 2: Update our `UserModelParseError` cases to accept a parameter
+Task 2: Using what you already know about `URLSession`'s `downloadTask`, make a request for the `User` image thumbnail and display it the cell. 
 
 __Part I: Advanced__
-
-__Part I: Expert__
+Have a placehold image available for the cell until the download completes, then swap that out with the correct image
 
 #### Part II
-Task 1: 
-
-__Part II: Advanced__
-
-__Part II: Expert__
-
+Task 1: We're going to need some way to construct our URL's based on the settings of the `SettingsManager`. Create a new factory class, `RandomUserEndpointFactory` that reads the current settings of `SettingsManager` in order to create a properly formatted request URL. 
