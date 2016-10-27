@@ -186,21 +186,81 @@ There can be many discussion points here, but the critical on is that we need to
 
 ---
 ### The `SettingsManager` singleton
+This time around, we're going to utilize the singleton in a much more useful manner by having it manage our settings across the entirety of our app! Add the following to the `SettingsManager` class:
 
-Start out simply by setting up your `manager` instance and `private init`
-
-This time around, we're going to utilize the singleton in a much more useful manner by having it manage our settings across the entirety of our app! Add the following `var` to the `SettingsManager` class:
-
-1. `var results: Int`
-2. `var gender: UserGender`
-3. `var nationality: UserNationality`
-4. `var excluded: UserFields`
+```swift
+    var results: Int
+    var gender: UserGender
+    var nationality: UserNationality
+    var excluded: UserField
+    
+    let minResults: Int = 1
+    let maxResults: Int = 200
+```
 
 Additionally, create three `enum` in the `SettingsManager.swift` file, but outside of the {}'s for `SettingsManager`:
 
-1. `enum UserGender: String`
-2. `enum UserNationality: String`
-3. `enum UserFields: String`
+```swift 
+enum UserGender: String {
+    case male, female, both
+}
 
+enum UserNationality: String {
+    case AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NL, NZ, TR, US, all
+}
 
+enum UserField: String {
+    case gender, name, location, email, login, id, picture, nat, none
+}
+```
+
+And now, set up your `manager` singleton instance and `private init`
+
+#### Updating a Setting
+Create the function `func updateNumberOfResults(_ results: Int)` and fill it in. 
+
+---
+### Updating the `SettingsManager` with new values
+
+<details><summary>Q1: How will we monitor a change in the slider in order to update the SettingsManager's values?</summary>
+One option is to have the <code>UITableViewCell</code> call on <code>SettingsManager</code> inside of the function we set up. And that totally works! 
+
+But think about this: if we wanted to reuse this class in another project, could we? 
+</details>
+
+#### Direct Singleton Access Approach
+Go ahead and adjust the singleton directly in `didChangeValue` inside of `SliderTableViewCell`.
+
+#### Alternative Approach
+Ok, let's take a look at another way of doing this. (pssst. delegation)
+
+#### Updating `APIRequestManager` to use `SettingsManager`
+Lastly, let's update the original method for user requests to use the value from `SettingsManager`
+
+`private static let randomAPIEndpoint: URL = URL(string: "https://randomuser.me/api/?results=\(SettingsManager.manager.results)")`
+
+<details><summary>Wait... what's going on?</summary>
+Well, when the singleton gets made, the SettingsManager value for results is set. So, it's not going to update later on on its own. 
+  
+So now, we'll need to build out something to help manage the URLs for the requests that need to be made! 
+</details>
+
+---
+### Exercises
+
+#### Part I
+Task 1: With one type of settings cell ready, let's move on to the next one: `SegmentedCell`. Make sure that your `UITableViewCell` subclass can communicate with `SettingsManager` to update the value for the parameter.
+
+Task 2: Update our `UserModelParseError` cases to accept a parameter
+
+__Part I: Advanced__
+
+__Part I: Expert__
+
+#### Part II
+Task 1: 
+
+__Part II: Advanced__
+
+__Part II: Expert__
 
