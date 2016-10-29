@@ -1,5 +1,10 @@
 # AC3.2-APIs: Intro
 ---
+### Solutions Branch:
+
+1. [Full solution up to part 2 (not yet complete)](https://github.com/C4Q/AC3.2-APIs/tree/2_full-solutions)
+
+---
 ### Contents
 0. Intro
  1. [Readings](https://github.com/C4Q/AC3.2-APIs/blob/master/README.md#readings)
