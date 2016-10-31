@@ -7,43 +7,49 @@ In task 1, you were asked to build out the `SegementedCell` using the `SliderCel
 1. Define a `static let` constant for it's `cellIdentifier` property to be used in `cellForRow` in `SettingsTableViewController`
 2. Contain both an outlet and action that links the `UISegmentedControl` object that is in your cell in storyboard
   - You may have named them differently; I went with `genderSegmentControl` and `selectedSegmentDidChange(_:)` where the `sender` is `UISegmentedControl`
-3. A way to parse between the currently selected segment and the segment's index. Here's how I did it: 
+3. A way to parse between the currently selected segment and the segment's index. 
+
+__Here's how I did it:__
 
 ```swift 
-  // *** In SegmentedTableViewCell ***
-  
-  // 1. I decided I wanted two helpers to assist me in switching between segment index and the corresponding UserGender
-  internal func genderFor(segment: Int) -> UserGender {
-     switch segment {
-     case 0: return .both
-     case 1: return .male
-     default: return .female
-     }
-  }
-    
-  internal func segmentFor(gender: UserGender) -> Int {
-     switch gender {
-     case .both: return 0
-     case .male: return 1
-     default: return 2
-     }
-  }
-    
-  // 2. Next, I wanted to have functions to update my selections: one using Int as a parameter and the other UserGender
-  internal func updateSelectedSegment(index: Int) {
-     genderSegmentedControl.selectedSegmentIndex = index
-  }
-    
-  internal func updateSelectedSegment(gender: UserGender) {
-     genderSegmentedControl.selectedSegmentIndex = segmentFor(gender: gender)
-  }
-```
+  protocol SegmentedCellDelegate: class {
+    func segmentedValueChanged(_ gender: UserGender)
+}
 
-Then for my protocol, `SegmentedCellDelegate`: 
+class SegmentedTableViewCell: UITableViewCell {
+    internal weak var delegate: SegmentedCellDelegate?
+    static let cellIdentifier: String = "SegmentedSelectionCellIdentifier"
+    @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
+    
+    // 1. I decided I wanted two helpers to assist me in switching between segment index and the corresponding UserGender
+    internal func genderFor(segment: Int) -> UserGender {
+        switch segment {
+        case 0: return .both
+        case 1: return .male
+        default: return .female
+        }
+    }
+    
+    internal func segmentFor(gender: UserGender) -> Int {
+        switch gender {
+        case .both: return 0
+        case .male: return 1
+        default: return 2
+        }
+    }
+    
+    // 2. Next, I wanted to have functions to update my selections: one using Int as a parameter and the other UserGender
+    internal func updateSelectedSegment(index: Int) {
+        genderSegmentedControl.selectedSegmentIndex = index
+    }
+    
+    internal func updateSelectedSegment(gender: UserGender) {
+        genderSegmentedControl.selectedSegmentIndex = segmentFor(gender: gender)
+    }
 
-```swift
-protocol SegmentedCellDelegate: class {
-  func segmentedValueChanged(_ gender: UserGender)
+    @IBAction func selectedSegmentDidChange(_ sender: UISegmentedControl) {
+        self.delegate?.segmentedValueChanged(genderFor(segment: sender.selectedSegmentIndex))
+    }
 }
 ```
 
@@ -66,3 +72,7 @@ And lastly, in `cellForRow` in `SettingsTableViewController`
       segmentedCell.delegate = SettingsManager.manager
    }
 ```
+---
+#### `SwitchCell` Implementation Discussion
+The `SwitchCell` implementation is going to be a bit trickier, and if you've found a solution other than this one be sure to share. 
+
