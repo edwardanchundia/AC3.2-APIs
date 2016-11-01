@@ -21,4 +21,43 @@ In practice, `UserDefaults` tends to be used as a lightweight persistant storage
 In looking at `UserDefaults`, we're going to store our `SettingsManager`s settings for `results`, `nationality` and `gender` so that any change we make in our `SettingsTableViewController` persists between runs of our app. 
 
 ---
-### 
+### Implementation
+
+We're going to add two new functions: `loadSettings()` and `saveSettings()`
+
+`loadSettings()` will be responsible for loading our `SettingsManager`s settings from `UserDefaults`
+
+`saveSettings()` will be responsible for saving them
+
+<details><summary>Q1: Where should we call saveSettings()?</summary>
+  After any change to our SettingsManager settings.. so basically this should be the last line in all of our delegate functions
+</details>
+
+<details><summary>Q2: Where should we call loadSettings()?</summary>
+  Welcome to the world of AppDelegate!
+</details>
+
+#### Saving 
+
+1. (Together in class) Start with `saveSettings()`
+2. Get a reference to `UserDefaults`
+3. Save `gender` and `results`
+
+<details><summary>Q: Why did we encounter an error?</summary>
+  We need to pass in valid types to our property list. 
+</details>
+
+1. Fix gender/results if needed
+2. Implement saving `userNationalitySwitchStatus`
+
+#### Loading
+
+Let's implement this together and get this working. At a high level, we'll need to check `UserDefaults.standard` for the existance of the keys we defined previously. Once we get the right values back, we'll need to manipulate them to recreate our enums
+
+---
+### Exercises
+
+1. Add saving/loading of `userFieldSwitchStatus` as well
+2. Let's save a history of our "seed" info from our API requests
+
+
