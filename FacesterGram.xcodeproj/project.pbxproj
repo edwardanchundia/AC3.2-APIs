@@ -12,9 +12,15 @@
 		146EF9FC1DB9830E00592B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146EF9FB1DB9830E00592B9A /* Assets.xcassets */; };
 		146EF9FF1DB9830E00592B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146EF9FD1DB9830E00592B9A /* LaunchScreen.storyboard */; };
 		146EFA0A1DB9830E00592B9A /* FacesterGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146EFA091DB9830E00592B9A /* FacesterGramTests.swift */; };
-		146EFA161DBAECED00592B9A /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146EFA151DBAECED00592B9A /* UsersTableViewController.swift */; };
+		146EFA161DBAECED00592B9A /* for .swift in Sources */ = {isa = PBXBuildFile; fileRef = 146EFA151DBAECED00592B9A /* for .swift */; };
 		146EFA181DBAED0D00592B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146EFA171DBAED0D00592B9A /* User.swift */; };
 		146EFA1C1DBAED5600592B9A /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146EFA1B1DBAED5600592B9A /* APIRequestManager.swift */; };
+		57F12EAE1DC8EF45003CC7F0 /* RandomUserURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EAD1DC8EF45003CC7F0 /* RandomUserURLFactory.swift */; };
+		57F12EB01DC8EF71003CC7F0 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EAF1DC8EF71003CC7F0 /* SettingsManager.swift */; };
+		57F12EB21DC8F10C003CC7F0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EB11DC8F10C003CC7F0 /* SettingTableViewController.swift */; };
+		57F12EB51DC8F19B003CC7F0 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EB41DC8F19B003CC7F0 /* SegmentedTableViewCell.swift */; };
+		57F12EB71DC8F1C5003CC7F0 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EB61DC8F1C5003CC7F0 /* SliderTableViewCell.swift */; };
+		57F12EB91DC8F2AD003CC7F0 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F12EB81DC8F2AD003CC7F0 /* SwitchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +43,15 @@
 		146EFA051DB9830E00592B9A /* FacesterGramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacesterGramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146EFA091DB9830E00592B9A /* FacesterGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesterGramTests.swift; sourceTree = "<group>"; };
 		146EFA0B1DB9830E00592B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		146EFA151DBAECED00592B9A /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersTableViewController.swift; path = "View Controllers/UsersTableViewController.swift"; sourceTree = "<group>"; };
+		146EFA151DBAECED00592B9A /* for .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "for .swift"; path = "View Controllers/for .swift"; sourceTree = "<group>"; };
 		146EFA171DBAED0D00592B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		146EFA1B1DBAED5600592B9A /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRequestManager.swift; path = Managers/APIRequestManager.swift; sourceTree = "<group>"; };
+		57F12EAD1DC8EF45003CC7F0 /* RandomUserURLFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUserURLFactory.swift; sourceTree = "<group>"; };
+		57F12EAF1DC8EF71003CC7F0 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		57F12EB11DC8F10C003CC7F0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		57F12EB41DC8F19B003CC7F0 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		57F12EB61DC8F1C5003CC7F0 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
+		57F12EB81DC8F2AD003CC7F0 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +97,7 @@
 			children = (
 				146EFA1D1DBAED5D00592B9A /* Managers */,
 				146EFA1A1DBAED1A00592B9A /* View Controllers */,
+				57F12EB31DC8F15D003CC7F0 /* Views */,
 				146EFA191DBAED1300592B9A /* Model */,
 				146EFA141DBAEBA000592B9A /* Supporting Files */,
 			);
@@ -123,7 +136,8 @@
 		146EFA1A1DBAED1A00592B9A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				146EFA151DBAECED00592B9A /* UsersTableViewController.swift */,
+				146EFA151DBAECED00592B9A /* for .swift */,
+				57F12EB11DC8F10C003CC7F0 /* SettingTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -132,8 +146,20 @@
 			isa = PBXGroup;
 			children = (
 				146EFA1B1DBAED5600592B9A /* APIRequestManager.swift */,
+				57F12EAD1DC8EF45003CC7F0 /* RandomUserURLFactory.swift */,
+				57F12EAF1DC8EF71003CC7F0 /* SettingsManager.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		57F12EB31DC8F15D003CC7F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				57F12EB41DC8F19B003CC7F0 /* SegmentedTableViewCell.swift */,
+				57F12EB61DC8F1C5003CC7F0 /* SliderTableViewCell.swift */,
+				57F12EB81DC8F2AD003CC7F0 /* SwitchTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,7 +207,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = C4Q;
 				TargetAttributes = {
 					146EF9F01DB9830D00592B9A = {
@@ -239,9 +265,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57F12EB21DC8F10C003CC7F0 /* SettingTableViewController.swift in Sources */,
+				57F12EAE1DC8EF45003CC7F0 /* RandomUserURLFactory.swift in Sources */,
 				146EFA1C1DBAED5600592B9A /* APIRequestManager.swift in Sources */,
-				146EFA161DBAECED00592B9A /* UsersTableViewController.swift in Sources */,
+				57F12EB01DC8EF71003CC7F0 /* SettingsManager.swift in Sources */,
+				57F12EB71DC8F1C5003CC7F0 /* SliderTableViewCell.swift in Sources */,
+				146EFA161DBAECED00592B9A /* for .swift in Sources */,
 				146EF9F51DB9830E00592B9A /* AppDelegate.swift in Sources */,
+				57F12EB91DC8F2AD003CC7F0 /* SwitchTableViewCell.swift in Sources */,
+				57F12EB51DC8F19B003CC7F0 /* SegmentedTableViewCell.swift in Sources */,
 				146EFA181DBAED0D00592B9A /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +334,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -352,6 +385,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
